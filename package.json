@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "webpack-dev-server": "webpack-dev-server",
-	"dev": "webpack-dev-server --mode=development",
-	"prod": "webpack --mode=production"
+    "dev": "webpack-dev-server --mode=development",
+    "prod": "webpack --mode=production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "react": "^16.8.5",
-    "react-dom": "^16.8.5"
+    "react-dom": "^16.8.5",
+    "react-loadable": "^5.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
