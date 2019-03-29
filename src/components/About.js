@@ -12,6 +12,13 @@ class AboutSection extends React.Component {
 		);
 	}
 }
-
+/**
+ * We are importing the HOC and passing our AboutSection component inside of it.
+ * The HOC will return an enhanced component called About which can now use the functionalities
+ * like props and incrementCount() that HOC has added
+ * @type {{new(*=): NewEnhancedComponent}}
+ */
 const About = HOC( AboutSection );
+
+// We finally export the enhanced Component 'About' that HOC has returned
 export default About;
