@@ -1,4 +1,5 @@
 import React from 'react';
+import { Router, Link } from "@reach/router"
 import Loadable from 'react-loadable';
 
 /**
@@ -8,7 +9,10 @@ import Loadable from 'react-loadable';
  * So its dynamic and will split out About component into a separate component.
  */
 const LoadableAbout = Loadable({
-	loader: () => import( './components/About.js' )
+	loader: () => import( './components/About' ),
+	loading() {
+		return <h1>Loading split out code...</h1>
+	}
 });
 
 
@@ -16,10 +20,12 @@ class App extends React.Component {
 
 	render() {
 		return(
-			<div>
-				<h1>This is my React Component</h1>
-
-			</div>
+			<React.Fragment>
+				<Link to="about">About Us</Link>
+				<Router>
+					<LoadableAbout path="about"/>
+				</Router>
+			</React.Fragment>
 		);
 	}
 }
