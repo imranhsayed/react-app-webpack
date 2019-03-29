@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router, Link } from "@reach/router"
+import { Router, Link } from "@reach/router";
+import About from "./components/About";
 
 class App extends React.Component {
 
@@ -8,7 +9,7 @@ class App extends React.Component {
 			<React.Fragment>
 				<Link to="about">About Us</Link>
 				<Router>
-					<LoadableAbout path="about"/>
+					<About path="/about"/>
 				</Router>
 			</React.Fragment>
 		);
