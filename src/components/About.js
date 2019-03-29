@@ -1,11 +1,26 @@
 import React from 'react';
-import HOC from './HOC';
+import { HOC } from './HOC';
 
 class AboutSection extends React.Component {
+	constructor( props ) {
+		super( props );
+		this.state = {
+			count: 0
+		}
+	}
+
+	incrementCount = ( event ) => {
+		this.setState( prevState => ( { count: prevState.count + 1 } ) );
+	};
+
 	render() {
+
+		const { count } = this.state;
+
 		return(
 			<div>
-				<h2>Home Component</h2>
+				This is About
+				<h2 onClick={ this.incrementCount }>Clicked { count } times</h2>
 			</div>
 		);
 	}
