@@ -2,32 +2,19 @@ import React from 'react';
 
 /**
  * HOC is a Higher Order Component that we create, which takes Original Component as its param
- * and returns a New Enhanced Component adding the count props and incrementCount() as its
- * enhanced functionality.
- * This count props and incrementCount() can now be used by the Original Component that gets passed
- * to the HOC at the time of importing it.
- * @param OriginalComponent
- * @return {{new(*=): NewEnhancedComponent}}
+ * and returns a New Enhanced Component conditionally
+ * At the time of importing the HOC and using it , If we pass loading as true
+ * it will return 'Loading..', AboutSection component otherwise.
+ * @param props
+ * @return {function(*)}
  * @constructor
  */
-const HOC = ( OriginalComponent ) => {
+const HOC = ( props ) => ( OriginalComponent ) => {
 	return class NewEnhancedComponent extends React.Component {
-
-		constructor( props ) {
-			super( props );
-			this.state = {
-				count: 0
-			}
-		}
-
-		incrementCount = ( event ) => {
-			this.setState( prevState => ( { count: prevState.count + 1 } ) );
-		};
-
 		render() {
 			return(
 				<div>
-					<OriginalComponent count={ this.state.count } incrementCount={ this.incrementCount }/>
+					{ props.loading ? <h2>Loading...</h2> : <OriginalComponent/> }
 				</div>
 			)
 		}
