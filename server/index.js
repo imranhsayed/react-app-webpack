@@ -1,7 +1,7 @@
 import express from 'express';
 import React from 'react';
 // renderToString is going to take our node application and render it as html in string format
-import { renderToString } from 'react-dom/server';
+import { renderToNodeStream } from 'react-dom/server';
 import { ServerLocation } from '@reach/router';
 import App from '../src/App';
 import fs from 'fs';
@@ -21,6 +21,10 @@ app.use( '/dist', express.static( 'dist' ) );
 
 // This will be run on every other request that does not hit the above ( app.use('/dist') ) request handler
 app.use( ( req, res ) => {
+
+	// While you are still finishing your server side rendering, it will be loading your css.
+	res.write( parts[0] );
+
 	const reactMarkUp = (
 		// ServerLocation will pass any url that's be hit on the browser so that App Component inside of it works correctly.
 		<ServerLocation url={ req.url }>
@@ -29,8 +33,21 @@ app.use( ( req, res ) => {
 		</ServerLocation>
 	);
 
-	res.send( `${ parts[0] } ${ renderToString( reactMarkUp )} ${ parts[1] }` );
-	res.end();
+	// It will a stream of incoming data
+	const stream = renderToNodeStream( reactMarkUp );
+
+	/**
+	 * It will take stream as it has more data coming from back react rendering, it will pipe that into res
+	 * stream pipe is now connected to the res pipe
+	 * and end: false , means I am not done yet it still has to write the footer
+	 */
+	stream.pipe( res, { end: false } );
+
+	// So when it is finished, run the function which is second paaram.
+	stream.on( 'end', () => {
+		res.write( parts[1] );
+		res.end();
+	} );
 } );
 
 console.log( `listing on PORT ${ PORT }` );
