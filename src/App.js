@@ -7,10 +7,7 @@ class App extends React.Component {
 	render() {
 		return(
 			<React.Fragment>
-				<Link to="about">About Us</Link>
-				<Router>
-					<About path="/about"/>
-				</Router>
+				<About/>
 			</React.Fragment>
 		);
 	}
