@@ -14,8 +14,8 @@ export default class Nav extends React.Component {
 		return state;
 	}
 
-	handleOnClick = () => {
-		this.setState( { nav: ! this.state.nav } )
+	handleOnClick = ( event ) => {
+		console.log( 'clicked' );
 	}
 
 	componentWillUnmount() {
