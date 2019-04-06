@@ -6,16 +6,12 @@ class About extends React.Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			name: ''
+			name: false
 		};
 	}
 
-	static getDerivedStateFromProps() {
-		console.log( 'I am called' );
-	}
-
 	handleOnClick = ( event ) => {
-		this.setState({ name: 'Imran' });
+		this.setState({ name: ! this.state.name });
 	};
 
 
