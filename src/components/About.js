@@ -1,28 +1,29 @@
 import React from 'react';
-import Nav from './Nav';
+import { ChildComponent } from "./ChildComponent";
 
 class About extends React.Component {
 
 	constructor( props ) {
 		super( props );
 		this.state = {
-			name: false
+			countVal: 1
 		};
 	}
 
-	handleOnClick = ( event ) => {
-		this.setState({ name: ! this.state.name });
-	};
+	componentDidMount() {
 
+		setInterval(  () => {
+			this.setState( { countVal: 1  } )
+		}, 3000 )
+	}
 
 
 	render() {
 
 		return(
 			<div>
-				This is About
-				<button onClick={this.handleOnClick}>Click Me</button>
-				{ ! this.state.name && <Nav/>}
+				This is About: Parent Component
+			<ChildComponent countVal={this.state.countVal}/>
 			</div>
 		);
 	}
