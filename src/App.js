@@ -1,13 +1,12 @@
 import React from 'react';
-import { Router, Link } from "@reach/router";
-import About from "./components/About";
+import Home from "./components/Home";
 
 class App extends React.Component {
 
 	render() {
 		return(
 			<React.Fragment>
-				<About/>
+				<Home/>
 			</React.Fragment>
 		);
 	}
